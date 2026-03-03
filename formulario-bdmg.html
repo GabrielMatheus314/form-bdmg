@@ -1,0 +1,1873 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulario de Proposta - BDMG Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Sora:wght@500;600;700&amp;display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-soft: #f6f3ec;
+      --bg-accent: #dce9eb;
+      --card: #fffcf7;
+      --line: #d9d4c8;
+      --text: #1f2c34;
+      --muted: #5d6b72;
+      --primary: #0d6a73;
+      --primary-strong: #0a5057;
+      --secondary: #de8a31;
+      --secondary-soft: #fff2de;
+      --focus: #1a8793;
+      --shadow: 0 12px 30px rgba(10, 80, 87, 0.12);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Outfit, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(222, 138, 49, 0.22), transparent 36%),
+        radial-gradient(circle at 90% 15%, rgba(13, 106, 115, 0.22), transparent 30%),
+        linear-gradient(160deg, var(--bg-soft), var(--bg-accent));
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: min(1100px, calc(100% - 2rem));
+      margin: 2rem auto 3rem;
+    }
+
+    .hero {
+      background: linear-gradient(140deg, #0d6a73, #0a5057 60%, #083a40);
+      color: #f7fcfc;
+      border-radius: calc(var(--radius) + 4px);
+      padding: clamp(1.2rem, 2.5vw, 1.8rem);
+      box-shadow: var(--shadow);
+      animation: fadeUp 500ms ease-out;
+    }
+
+    .hero h1 {
+      font-family: Sora, "Trebuchet MS", sans-serif;
+      font-size: clamp(1.25rem, 2.3vw, 1.9rem);
+      margin: 0 0 0.45rem;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #d3e9ea;
+      line-height: 1.45;
+      font-size: 0.97rem;
+    }
+
+    form {
+      margin-top: 1rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: 0 6px 18px rgba(17, 45, 54, 0.06);
+      animation: fadeUp 500ms ease both;
+    }
+
+    .section:nth-child(2) {
+      animation-delay: 60ms;
+    }
+
+    .section:nth-child(3) {
+      animation-delay: 120ms;
+    }
+
+    .section:nth-child(4) {
+      animation-delay: 180ms;
+    }
+
+    .section:nth-child(5) {
+      animation-delay: 240ms;
+    }
+
+    .section h2 {
+      margin: 0 0 0.9rem;
+      font-family: Sora, "Trebuchet MS", sans-serif;
+      font-size: 1.08rem;
+      color: var(--primary-strong);
+    }
+
+    .section h3 {
+      margin: 1.15rem 0 0.75rem;
+      font-size: 0.96rem;
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      gap: 0.85rem;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .field {
+      grid-column: span 12;
+      display: grid;
+      gap: 0.28rem;
+    }
+
+    .span-6 {
+      grid-column: span 6;
+    }
+
+    .span-4 {
+      grid-column: span 4;
+    }
+
+    .span-3 {
+      grid-column: span 3;
+    }
+
+    .span-8 {
+      grid-column: span 8;
+    }
+
+    label {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #c9c3b8;
+      border-radius: 10px;
+      background: #fff;
+      padding: 0.62rem 0.72rem;
+      font: inherit;
+      color: var(--text);
+      transition: border-color 120ms ease, box-shadow 120ms ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--focus);
+      box-shadow: 0 0 0 3px rgba(26, 135, 147, 0.14);
+    }
+
+    textarea {
+      min-height: 102px;
+      resize: vertical;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      background: var(--secondary-soft);
+      border: 1px dashed #e5c8a4;
+      border-radius: 10px;
+      padding: 0.6rem;
+    }
+
+    .options label {
+      color: #6f4f2d;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      background: #fff;
+      border: 1px solid #efdbbf;
+      border-radius: 999px;
+      padding: 0.32rem 0.62rem;
+    }
+
+    .disclaimer {
+      margin-top: 0.35rem;
+      padding: 0.75rem;
+      border-radius: 10px;
+      background: #f3f9fa;
+      border: 1px solid #cde2e5;
+      color: #35535b;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .notes {
+      margin: 0.4rem 0 0;
+      padding-left: 1.05rem;
+      color: #4a5d63;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .submit-area {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-top: 0.2rem;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 0.72rem 1rem;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 100ms ease, filter 120ms ease;
+    }
+
+    button:hover {
+      filter: brightness(1.04);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(145deg, var(--secondary), #c56f13);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #e6ecee;
+      color: #30454d;
+    }
+
+    .status-message {
+      margin: 0.45rem 0 0;
+      font-size: 0.9rem;
+      color: #33565e;
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    #pdfExportRoot {
+      position: fixed;
+      left: -99999px;
+      top: 0;
+      width: 794px;
+      background: #fff;
+      color: #182028;
+      padding: 24px;
+      z-index: -1;
+    }
+
+    .pdf-doc {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .pdf-header {
+      border-bottom: 2px solid #0d6a73;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+
+    .pdf-header h1 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      color: #0a5057;
+    }
+
+    .pdf-header p {
+      margin: 0;
+      color: #4e626b;
+      font-size: 11px;
+    }
+
+    .pdf-section {
+      margin-top: 10px;
+      break-inside: avoid-page;
+    }
+
+    .pdf-section h2 {
+      margin: 0 0 5px;
+      font-size: 13px;
+      color: #193844;
+    }
+
+    .pdf-subsection {
+      margin-top: 8px;
+    }
+
+    .pdf-subsection h3 {
+      margin: 0 0 5px;
+      font-size: 12px;
+      color: #2f4f5d;
+    }
+
+    .pdf-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ccd5da;
+    }
+
+    .pdf-table th,
+    .pdf-table td {
+      border: 1px solid #ccd5da;
+      text-align: left;
+      vertical-align: top;
+      padding: 4px 6px;
+      word-break: break-word;
+    }
+
+    .pdf-table th {
+      width: 34%;
+      background: #eef4f7;
+      color: #2e4f5c;
+      font-weight: 700;
+    }
+
+    .pdf-table td {
+      background: #fff;
+      color: #1e2d34;
+    }
+
+    .pdf-footer {
+      margin-top: 12px;
+      border-top: 1px solid #d3dde2;
+      padding-top: 8px;
+      font-size: 11px;
+      color: #55666e;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 880px) {
+      .span-8,
+      .span-6,
+      .span-4,
+      .span-3 {
+        grid-column: span 12;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <section class="hero">
+      <h1>Proposta de Financiamento BDMG Digital</h1>
+      <p>
+        Clientes com faturamento anual de ate R$ 30 milhoes e com, no minimo, 6 meses de operacao/faturamento.
+        Preencha os dados abaixo para analise da proposta.
+      </p>
+    </section>
+
+    <form id="bdmgForm" action="#" method="post" data-submit-after-pdf="false" data-pdf-provider="server" data-pdf-endpoint="/api/exportar-pdf">
+      <section class="section">
+        <h2>1) Dados do Credito - Capital de Giro</h2>
+        <div class="grid">
+          <div class="field span-6">
+            <label>Prazo total</label>
+            <div class="options">
+              <label><input type="radio" name="prazo_total" value="12 meses" required /> 12 meses</label>
+              <label><input type="radio" name="prazo_total" value="24 meses" /> 24 meses</label>
+              <label><input type="radio" name="prazo_total" value="36 meses" /> 36 meses</label>
+              <label><input type="radio" name="prazo_total" value="48 meses" /> 48 meses</label>
+              <label><input type="radio" name="prazo_total" value="60 meses" /> 60 meses</label>
+            </div>
+          </div>
+
+          <div class="field span-6">
+            <label>Prazo de carencia</label>
+            <div class="options">
+              <label><input type="radio" name="prazo_carencia" value="Sem carencia" required /> Sem carencia</label>
+              <label><input type="radio" name="prazo_carencia" value="3 meses" /> 3 meses</label>
+              <label><input type="radio" name="prazo_carencia" value="6 meses" /> 6 meses</label>
+            </div>
+          </div>
+
+          <div class="field span-6">
+            <label for="valorPretendido">Valor pretendido (R$)</label>
+            <input id="valorPretendido" name="valor_pretendido" type="text" inputmode="decimal" placeholder="Ex.: 150.000,00" required />
+          </div>
+
+          <div class="field span-6">
+            <label for="diaVencimento">Melhor data para vencimento da prestacao mensal</label>
+            <select id="diaVencimento" name="vencimento_mensal" required>
+              <option value="">Selecione</option>
+              <option value="05">Dia 05</option>
+              <option value="10">Dia 10</option>
+              <option value="20">Dia 20</option>
+              <option value="25">Dia 25</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>2) Dados da Empresa</h2>
+        <div class="grid">
+          <div class="field span-8">
+            <label for="razaoSocial">Razao social</label>
+            <input id="razaoSocial" name="razao_social" type="text" required />
+          </div>
+
+          <div class="field span-4">
+            <label for="cnpjEmpresa">CNPJ</label>
+            <input id="cnpjEmpresa" name="cnpj" type="text" inputmode="numeric" maxlength="18" placeholder="00.000.000/0000-00" required />
+          </div>
+
+          <div class="field span-4">
+            <label for="numFuncionarios">Nº de funcionarios</label>
+            <input id="numFuncionarios" name="numero_funcionarios" type="number" min="0" required />
+          </div>
+
+          <div class="field span-8">
+            <label for="representanteLegal">Nome do representante legal</label>
+            <input id="representanteLegal" name="representante_legal" type="text" required />
+          </div>
+
+          <div class="field span-4">
+            <label for="cpfRepresentante">CPF do representante legal</label>
+            <input id="cpfRepresentante" name="cpf_representante" type="text" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required />
+          </div>
+
+          <div class="field span-4">
+            <label for="contatoEmpresa">Nome do contato da empresa</label>
+            <input id="contatoEmpresa" name="contato_empresa" type="text" required />
+          </div>
+
+          <div class="field span-4">
+            <label for="emailContatoEmpresa">E-mail do contato</label>
+            <input id="emailContatoEmpresa" name="email_contato" type="email" required />
+          </div>
+
+          <div class="field span-4">
+            <label for="telEmpresa">Telefone</label>
+            <input id="telEmpresa" name="telefone_empresa" type="tel" placeholder="(00) 0000-0000" />
+          </div>
+
+          <div class="field span-4">
+            <label for="celEmpresa">Celular</label>
+            <input id="celEmpresa" name="celular_empresa" type="tel" placeholder="(00) 00000-0000" />
+          </div>
+
+          <div class="field span-4">
+            <label for="possuiImovel">Possui imovel registrado no CNPJ?</label>
+            <select id="possuiImovel" name="possui_imovel_cnpj">
+              <option value="">Selecione</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Nao</option>
+            </select>
+          </div>
+
+          <div id="valorImovelField" class="field span-4 is-hidden">
+            <label for="valorImovel">Valor do imovel (conforme matricula)</label>
+            <input id="valorImovel" name="valor_imovel_cnpj" type="text" inputmode="decimal" placeholder="Ex.: 480.000,00" />
+          </div>
+
+          <div class="field span-12">
+            <label for="enderecoEmpresa">Endereco principal da empresa</label>
+            <input id="enderecoEmpresa" name="endereco_empresa_livre" type="text" />
+          </div>
+        </div>
+
+        <h3>Endereco da Empresa</h3>
+        <div class="grid">
+          <div class="field span-3">
+            <label for="cepEmpresa">CEP</label>
+            <input id="cepEmpresa" name="cep_empresa" type="text" inputmode="numeric" placeholder="00000-000" />
+          </div>
+
+          <div class="field span-6">
+            <label for="ruaEmpresa">Rua</label>
+            <input id="ruaEmpresa" name="rua_empresa" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="numeroEmpresa">Nº</label>
+            <input id="numeroEmpresa" name="numero_empresa" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="complEmpresa">Complemento</label>
+            <input id="complEmpresa" name="complemento_empresa" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="bairroEmpresa">Bairro</label>
+            <input id="bairroEmpresa" name="bairro_empresa" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="municipioEmpresa">Municipio</label>
+            <input id="municipioEmpresa" name="municipio_empresa" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="estadoEmpresa">Estado (UF)</label>
+            <input id="estadoEmpresa" name="estado_empresa" type="text" maxlength="2" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>3) Conta Bancaria da Empresa (para liberacao dos recursos)</h2>
+        <div class="grid">
+          <div class="field span-6">
+            <label for="nomeBanco">Nome do banco</label>
+            <input id="nomeBanco" name="nome_banco" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="numeroBanco">Nº banco</label>
+            <input id="numeroBanco" name="numero_banco" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="agenciaBanco">Agencia</label>
+            <input id="agenciaBanco" name="agencia_banco" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="contaBanco">Conta</label>
+            <input id="contaBanco" name="conta_banco" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="digitoContaBanco">Digito</label>
+            <input id="digitoContaBanco" name="digito_conta_banco" type="text" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>4) Dados do Socio 1</h2>
+        <div class="grid">
+          <div class="field span-6">
+            <label for="s1Nome">Nome</label>
+            <input id="s1Nome" name="s1_nome" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1Cpf">CPF</label>
+            <input id="s1Cpf" name="s1_cpf" type="text" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1Participacao">Participacao societaria (%)</label>
+            <input id="s1Participacao" name="s1_participacao" type="number" min="0" max="100" step="0.01" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1Email">E-mail</label>
+            <input id="s1Email" name="s1_email" type="email" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1Telefone">Telefone</label>
+            <input id="s1Telefone" name="s1_telefone" type="tel" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1Celular">Celular</label>
+            <input id="s1Celular" name="s1_celular" type="tel" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1Sexo">Sexo</label>
+            <select id="s1Sexo" name="s1_sexo">
+              <option value="">Selecione</option>
+              <option value="feminino">Feminino</option>
+              <option value="masculino">Masculino</option>
+              <option value="outro">Outro</option>
+              <option value="nao_informar">Prefiro nao informar</option>
+            </select>
+          </div>
+
+          <div class="field span-3">
+            <label for="s1Identidade">Nº da identidade</label>
+            <input id="s1Identidade" name="s1_identidade" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1Orgao">Orgao expedidor</label>
+            <input id="s1Orgao" name="s1_orgao_expedidor" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1Nascimento">Data de nascimento</label>
+            <input id="s1Nascimento" name="s1_data_nascimento" type="date" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1Nacionalidade">Nacionalidade</label>
+            <input id="s1Nacionalidade" name="s1_nacionalidade" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1Profissao">Profissao</label>
+            <input id="s1Profissao" name="s1_profissao" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1EstadoCivil">Estado civil</label>
+            <select id="s1EstadoCivil" name="s1_estado_civil">
+              <option value="">Selecione</option>
+              <option value="solteiro">Solteiro(a)</option>
+              <option value="casado">Casado(a)</option>
+              <option value="divorciado">Divorciado(a)</option>
+              <option value="uniao_estavel">Uniao estavel</option>
+              <option value="viuvo">Viuvo(a)</option>
+            </select>
+          </div>
+
+          <div class="field span-6">
+            <label for="s1Regime">Regime de casamento</label>
+            <input id="s1Regime" name="s1_regime_casamento" type="text" />
+          </div>
+
+          <div class="field span-6">
+            <label for="s1DataEntrada">Data de entrada como socio na empresa</label>
+            <input id="s1DataEntrada" name="s1_data_entrada" type="date" />
+          </div>
+        </div>
+
+        <div id="s1ConjugeBlock" class="is-hidden">
+        <h3>Dados do Conjuge do Socio 1</h3>
+        <div class="grid">
+          <div class="field span-6">
+            <label for="s1ConjugeNome">Nome do conjuge</label>
+            <input id="s1ConjugeNome" name="s1_conjuge_nome" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1ConjugeCpf">CPF</label>
+            <input id="s1ConjugeCpf" name="s1_conjuge_cpf" type="text" inputmode="numeric" maxlength="14" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1ConjugeEmail">E-mail</label>
+            <input id="s1ConjugeEmail" name="s1_conjuge_email" type="email" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1ConjugeTelefone">Telefone</label>
+            <input id="s1ConjugeTelefone" name="s1_conjuge_telefone" type="tel" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1ConjugeCelular">Celular</label>
+            <input id="s1ConjugeCelular" name="s1_conjuge_celular" type="tel" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1ConjugeSexo">Sexo</label>
+            <select id="s1ConjugeSexo" name="s1_conjuge_sexo">
+              <option value="">Selecione</option>
+              <option value="feminino">Feminino</option>
+              <option value="masculino">Masculino</option>
+              <option value="outro">Outro</option>
+              <option value="nao_informar">Prefiro nao informar</option>
+            </select>
+          </div>
+
+          <div class="field span-3">
+            <label for="s1ConjugeIdentidade">Nº da identidade</label>
+            <input id="s1ConjugeIdentidade" name="s1_conjuge_identidade" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1ConjugeOrgao">Orgao expedidor</label>
+            <input id="s1ConjugeOrgao" name="s1_conjuge_orgao_expedidor" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1ConjugeNascimento">Data de nascimento</label>
+            <input id="s1ConjugeNascimento" name="s1_conjuge_data_nascimento" type="date" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1ConjugeNacionalidade">Nacionalidade</label>
+            <input id="s1ConjugeNacionalidade" name="s1_conjuge_nacionalidade" type="text" />
+          </div>
+
+          <div class="field span-6">
+            <label for="s1ConjugeProfissao">Profissao</label>
+            <input id="s1ConjugeProfissao" name="s1_conjuge_profissao" type="text" />
+          </div>
+        </div>
+        </div>
+
+        <h3>Endereco do Socio 1</h3>
+        <div class="grid">
+          <div class="field span-3">
+            <label for="s1Cep">CEP</label>
+            <input id="s1Cep" name="s1_cep" type="text" />
+          </div>
+
+          <div class="field span-6">
+            <label for="s1Rua">Rua</label>
+            <input id="s1Rua" name="s1_rua" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s1Numero">Nº</label>
+            <input id="s1Numero" name="s1_numero" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1Compl">Complemento</label>
+            <input id="s1Compl" name="s1_complemento" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1Bairro">Bairro</label>
+            <input id="s1Bairro" name="s1_bairro" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1Municipio">Municipio</label>
+            <input id="s1Municipio" name="s1_municipio" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s1Estado">Estado (UF)</label>
+            <input id="s1Estado" name="s1_estado" type="text" maxlength="2" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>5) Dados do Socio 2</h2>
+        <div class="grid">
+          <div class="field span-6">
+            <label for="s2Nome">Nome</label>
+            <input id="s2Nome" name="s2_nome" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2Cpf">CPF</label>
+            <input id="s2Cpf" name="s2_cpf" type="text" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2Participacao">Participacao societaria (%)</label>
+            <input id="s2Participacao" name="s2_participacao" type="number" min="0" max="100" step="0.01" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2Email">E-mail</label>
+            <input id="s2Email" name="s2_email" type="email" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2Telefone">Telefone</label>
+            <input id="s2Telefone" name="s2_telefone" type="tel" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2Celular">Celular</label>
+            <input id="s2Celular" name="s2_celular" type="tel" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2Sexo">Sexo</label>
+            <select id="s2Sexo" name="s2_sexo">
+              <option value="">Selecione</option>
+              <option value="feminino">Feminino</option>
+              <option value="masculino">Masculino</option>
+              <option value="outro">Outro</option>
+              <option value="nao_informar">Prefiro nao informar</option>
+            </select>
+          </div>
+
+          <div class="field span-3">
+            <label for="s2Identidade">Nº da identidade</label>
+            <input id="s2Identidade" name="s2_identidade" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2Orgao">Orgao expedidor</label>
+            <input id="s2Orgao" name="s2_orgao_expedidor" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2Nascimento">Data de nascimento</label>
+            <input id="s2Nascimento" name="s2_data_nascimento" type="date" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2Nacionalidade">Nacionalidade</label>
+            <input id="s2Nacionalidade" name="s2_nacionalidade" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2Profissao">Profissao</label>
+            <input id="s2Profissao" name="s2_profissao" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2EstadoCivil">Estado civil</label>
+            <select id="s2EstadoCivil" name="s2_estado_civil">
+              <option value="">Selecione</option>
+              <option value="solteiro">Solteiro(a)</option>
+              <option value="casado">Casado(a)</option>
+              <option value="divorciado">Divorciado(a)</option>
+              <option value="uniao_estavel">Uniao estavel</option>
+              <option value="viuvo">Viuvo(a)</option>
+            </select>
+          </div>
+
+          <div class="field span-6">
+            <label for="s2Regime">Regime de casamento</label>
+            <input id="s2Regime" name="s2_regime_casamento" type="text" />
+          </div>
+
+          <div class="field span-6">
+            <label for="s2DataEntrada">Data de entrada como socio na empresa</label>
+            <input id="s2DataEntrada" name="s2_data_entrada" type="date" />
+          </div>
+        </div>
+
+        <div id="s2ConjugeBlock" class="is-hidden">
+        <h3>Dados do Conjuge do Socio 2</h3>
+        <div class="grid">
+          <div class="field span-6">
+            <label for="s2ConjugeNome">Nome do conjuge</label>
+            <input id="s2ConjugeNome" name="s2_conjuge_nome" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2ConjugeCpf">CPF</label>
+            <input id="s2ConjugeCpf" name="s2_conjuge_cpf" type="text" inputmode="numeric" maxlength="14" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2ConjugeEmail">E-mail</label>
+            <input id="s2ConjugeEmail" name="s2_conjuge_email" type="email" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2ConjugeTelefone">Telefone</label>
+            <input id="s2ConjugeTelefone" name="s2_conjuge_telefone" type="tel" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2ConjugeCelular">Celular</label>
+            <input id="s2ConjugeCelular" name="s2_conjuge_celular" type="tel" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2ConjugeSexo">Sexo</label>
+            <select id="s2ConjugeSexo" name="s2_conjuge_sexo">
+              <option value="">Selecione</option>
+              <option value="feminino">Feminino</option>
+              <option value="masculino">Masculino</option>
+              <option value="outro">Outro</option>
+              <option value="nao_informar">Prefiro nao informar</option>
+            </select>
+          </div>
+
+          <div class="field span-3">
+            <label for="s2ConjugeIdentidade">Nº da identidade</label>
+            <input id="s2ConjugeIdentidade" name="s2_conjuge_identidade" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2ConjugeOrgao">Orgao expedidor</label>
+            <input id="s2ConjugeOrgao" name="s2_conjuge_orgao_expedidor" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2ConjugeNascimento">Data de nascimento</label>
+            <input id="s2ConjugeNascimento" name="s2_conjuge_data_nascimento" type="date" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2ConjugeNacionalidade">Nacionalidade</label>
+            <input id="s2ConjugeNacionalidade" name="s2_conjuge_nacionalidade" type="text" />
+          </div>
+
+          <div class="field span-6">
+            <label for="s2ConjugeProfissao">Profissao</label>
+            <input id="s2ConjugeProfissao" name="s2_conjuge_profissao" type="text" />
+          </div>
+        </div>
+        </div>
+
+        <h3>Endereco do Socio 2</h3>
+        <div class="grid">
+          <div class="field span-3">
+            <label for="s2Cep">CEP</label>
+            <input id="s2Cep" name="s2_cep" type="text" />
+          </div>
+
+          <div class="field span-6">
+            <label for="s2Rua">Rua</label>
+            <input id="s2Rua" name="s2_rua" type="text" />
+          </div>
+
+          <div class="field span-3">
+            <label for="s2Numero">Nº</label>
+            <input id="s2Numero" name="s2_numero" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2Compl">Complemento</label>
+            <input id="s2Compl" name="s2_complemento" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2Bairro">Bairro</label>
+            <input id="s2Bairro" name="s2_bairro" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2Municipio">Municipio</label>
+            <input id="s2Municipio" name="s2_municipio" type="text" />
+          </div>
+
+          <div class="field span-4">
+            <label for="s2Estado">Estado (UF)</label>
+            <input id="s2Estado" name="s2_estado" type="text" maxlength="2" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>6) Observacoes e Declaracao</h2>
+        <div class="grid">
+          <div class="field span-12">
+            <label for="observacoes">Observacoes</label>
+            <textarea id="observacoes" name="observacoes"></textarea>
+          </div>
+        </div>
+
+        <div class="disclaimer">
+          <strong>Orientacoes adicionais:</strong>
+          <ul class="notes">
+            <li>Caso a empresa tenha mais de 2 socios, preencha nova ficha com os dados dos demais socios.</li>
+            <li>Poderao ser solicitados documentos complementares para analise, incluindo comprovacao de faturamento dos ultimos 12 meses.</li>
+            <li>Enviar o IRPF do ultimo exercicio dos socios para preenchimento de patrimonio (imoveis e veiculos).</li>
+          </ul>
+        </div>
+
+        <div class="disclaimer">
+          Nos termos do contrato de correspondente bancario vigente, a empresa proponente autoriza o BDMG a:
+          consultar o SCR (Banco Central), obter informacoes junto a Secretaria de Estado da Fazenda sobre faturamento e
+          situacao fiscal, e consultar cadastros publicos e privados para exame do pedido de credito e atualizacao cadastral.
+        </div>
+
+        <div class="grid" style="margin-top: 0.75rem;">
+          <div class="field span-12">
+            <label><input type="checkbox" name="aceite_declaracao" required /> Confirmo que li e concordo com a declaracao acima.</label>
+          </div>
+
+          <div class="field span-6">
+            <label for="assinaturaNome">Representante legal da empresa proponente</label>
+            <input id="assinaturaNome" name="assinatura_representante_nome" type="text" required />
+          </div>
+
+          <div class="field span-3">
+            <label for="assinaturaCpf">CPF do representante</label>
+            <input id="assinaturaCpf" name="assinatura_representante_cpf" type="text" inputmode="numeric" maxlength="14" required />
+          </div>
+
+          <div class="field span-3">
+            <label for="dataAssinatura">Data</label>
+            <input id="dataAssinatura" name="data_assinatura" type="date" required />
+          </div>
+        </div>
+
+        <div class="submit-area">
+          <button id="submitButton" class="btn-primary" type="submit">Enviar proposta e gerar PDF</button>
+          <button class="btn-secondary" type="reset">Limpar campos</button>
+        </div>
+        <p id="pdfStatus" class="status-message" aria-live="polite"></p>
+      </section>
+    </form>
+  </main>
+  <div id="pdfExportRoot" aria-hidden="true"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById("bdmgForm");
+      var submitButton = document.getElementById("submitButton");
+      var statusMessage = document.getElementById("pdfStatus");
+      var pdfExportRoot = document.getElementById("pdfExportRoot");
+      var possuiImovelSelect = document.getElementById("possuiImovel");
+      var valorImovelField = document.getElementById("valorImovelField");
+      var valorImovelInput = document.getElementById("valorImovel");
+      var s1EstadoCivil = document.getElementById("s1EstadoCivil");
+      var s2EstadoCivil = document.getElementById("s2EstadoCivil");
+      var s1ConjugeBlock = document.getElementById("s1ConjugeBlock");
+      var s2ConjugeBlock = document.getElementById("s2ConjugeBlock");
+      var currencyFieldNames = ["valor_pretendido", "valor_imovel_cnpj"];
+      var cpfFieldNames = [
+        "cpf_representante",
+        "s1_cpf",
+        "s1_conjuge_cpf",
+        "s2_cpf",
+        "s2_conjuge_cpf",
+        "assinatura_representante_cpf"
+      ];
+      var cnpjFieldNames = ["cnpj"];
+
+      function cleanText(value) {
+        return (value || "").replace(/\s+/g, " ").trim();
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function formatDate(value) {
+        var dateParts = value.split("-");
+        if (dateParts.length !== 3) {
+          return value;
+        }
+        return dateParts[2] + "/" + dateParts[1] + "/" + dateParts[0];
+      }
+
+      function toCurrencyNumber(value) {
+        var raw = cleanText(value);
+        if (!raw) {
+          return NaN;
+        }
+
+        raw = raw.replace(/\s/g, "").replace(/R\$/g, "");
+        if (raw.indexOf(",") !== -1) {
+          raw = raw.replace(/\./g, "").replace(",", ".");
+        } else {
+          raw = raw.replace(/\./g, "");
+        }
+
+        var numeric = Number(raw.replace(/[^\d.-]/g, ""));
+        return Number.isFinite(numeric) ? numeric : NaN;
+      }
+
+      function formatCurrency(value) {
+        var inputText = cleanText(value);
+        if (!inputText) {
+          return "";
+        }
+
+        var numeric = toCurrencyNumber(inputText);
+        if (!Number.isFinite(numeric)) {
+          return inputText;
+        }
+
+        return numeric.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+          minimumFractionDigits: 2
+        });
+      }
+
+      function digitsOnly(value) {
+        return String(value || "").replace(/\D/g, "");
+      }
+
+      function formatCpf(value) {
+        var digits = digitsOnly(value).slice(0, 11);
+        if (digits.length <= 3) {
+          return digits;
+        }
+        if (digits.length <= 6) {
+          return digits.replace(/(\d{3})(\d+)/, "$1.$2");
+        }
+        if (digits.length <= 9) {
+          return digits.replace(/(\d{3})(\d{3})(\d+)/, "$1.$2.$3");
+        }
+        return digits.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, "$1.$2.$3-$4");
+      }
+
+      function formatCnpj(value) {
+        var digits = digitsOnly(value).slice(0, 14);
+        if (digits.length <= 2) {
+          return digits;
+        }
+        if (digits.length <= 5) {
+          return digits.replace(/(\d{2})(\d+)/, "$1.$2");
+        }
+        if (digits.length <= 8) {
+          return digits.replace(/(\d{2})(\d{3})(\d+)/, "$1.$2.$3");
+        }
+        if (digits.length <= 12) {
+          return digits.replace(/(\d{2})(\d{3})(\d{3})(\d+)/, "$1.$2.$3/$4");
+        }
+        return digits.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d+)/, "$1.$2.$3/$4-$5");
+      }
+
+      function formatCurrencyTyping(value) {
+        var raw = String(value || "").replace(/[^\d,\.]/g, "");
+        if (!raw) {
+          return "";
+        }
+
+        if (raw.indexOf(",") === -1 && raw.indexOf(".") !== -1) {
+          var dotParts = raw.split(".");
+          if (dotParts.length === 2 && dotParts[1].length <= 2) {
+            raw = dotParts[0] + "," + dotParts[1];
+          } else {
+            raw = raw.replace(/\./g, "");
+          }
+        } else {
+          raw = raw.replace(/\./g, "");
+        }
+
+        var parts = raw.split(",");
+        var integerPart = parts.shift() || "";
+        var decimalPart = parts.join("").replace(/\D/g, "").slice(0, 2);
+
+        integerPart = integerPart.replace(/\D/g, "");
+        if (!integerPart) {
+          integerPart = "0";
+        }
+        integerPart = integerPart.replace(/^0+(?=\d)/, "");
+        integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        return decimalPart ? integerPart + "," + decimalPart : integerPart;
+      }
+
+      function finalizeCurrencyFormat(value) {
+        var typingValue = formatCurrencyTyping(value);
+        if (!typingValue) {
+          return "";
+        }
+
+        if (typingValue.indexOf(",") === -1) {
+          return typingValue + ",00";
+        }
+
+        var parts = typingValue.split(",");
+        var decimal = parts[1] || "";
+        if (decimal.length === 0) {
+          decimal = "00";
+        } else if (decimal.length === 1) {
+          decimal = decimal + "0";
+        }
+        return parts[0] + "," + decimal.slice(0, 2);
+      }
+
+      function bindMasks() {
+        currencyFieldNames.forEach(function (name) {
+          var field = form.querySelector('[name="' + escapeForSelector(name) + '"]');
+          if (!field) {
+            return;
+          }
+          if (field.dataset.maskBound !== "1") {
+            field.addEventListener("input", function () {
+              this.value = formatCurrencyTyping(this.value);
+            });
+            field.addEventListener("blur", function () {
+              this.value = finalizeCurrencyFormat(this.value);
+            });
+            field.dataset.maskBound = "1";
+          }
+          field.value = finalizeCurrencyFormat(field.value);
+        });
+
+        cpfFieldNames.forEach(function (name) {
+          var field = form.querySelector('[name="' + escapeForSelector(name) + '"]');
+          if (!field) {
+            return;
+          }
+          if (field.dataset.maskBound !== "1") {
+            field.addEventListener("input", function () {
+              this.value = formatCpf(this.value);
+            });
+            field.addEventListener("blur", function () {
+              this.value = formatCpf(this.value);
+            });
+            field.dataset.maskBound = "1";
+          }
+          field.value = formatCpf(field.value);
+        });
+
+        cnpjFieldNames.forEach(function (name) {
+          var field = form.querySelector('[name="' + escapeForSelector(name) + '"]');
+          if (!field) {
+            return;
+          }
+          if (field.dataset.maskBound !== "1") {
+            field.addEventListener("input", function () {
+              this.value = formatCnpj(this.value);
+            });
+            field.addEventListener("blur", function () {
+              this.value = formatCnpj(this.value);
+            });
+            field.dataset.maskBound = "1";
+          }
+          field.value = formatCnpj(field.value);
+        });
+      }
+
+      function escapeForSelector(value) {
+        if (window.CSS && typeof window.CSS.escape === "function") {
+          return window.CSS.escape(value);
+        }
+        return value.replace(/"/g, '\\"');
+      }
+
+      function isMarriageState(rawValue) {
+        return rawValue === "casado" || rawValue === "uniao_estavel";
+      }
+
+      function getControls(name) {
+        return form.querySelectorAll('[name="' + escapeForSelector(name) + '"]');
+      }
+
+      function getRawValue(name) {
+        var controls = getControls(name);
+        if (!controls.length) {
+          return "";
+        }
+
+        var first = controls[0];
+        var type = (first.type || "").toLowerCase();
+        var tag = first.tagName.toLowerCase();
+
+        if (type === "radio") {
+          var checked = form.querySelector('input[name="' + escapeForSelector(name) + '"]:checked');
+          return checked ? cleanText(checked.value) : "";
+        }
+
+        if (type === "checkbox") {
+          return first.checked ? "1" : "";
+        }
+
+        if (tag === "select") {
+          return cleanText(first.value);
+        }
+
+        return cleanText(first.value);
+      }
+
+      function getDisplayValue(name) {
+        var controls = getControls(name);
+        if (!controls.length) {
+          return "";
+        }
+
+        var first = controls[0];
+        var type = (first.type || "").toLowerCase();
+        var tag = first.tagName.toLowerCase();
+
+        if (type === "radio") {
+          var checked = form.querySelector('input[name="' + escapeForSelector(name) + '"]:checked');
+          if (!checked) {
+            return "";
+          }
+          var optionLabel = checked.closest("label");
+          return optionLabel ? cleanText(optionLabel.textContent) : cleanText(checked.value);
+        }
+
+        if (type === "checkbox") {
+          return first.checked ? "Sim" : "Nao";
+        }
+
+        if (tag === "select") {
+          var selectedOption = first.options[first.selectedIndex];
+          var selectedText = selectedOption ? cleanText(selectedOption.textContent) : "";
+          return selectedText.toLowerCase() === "selecione" ? "" : selectedText;
+        }
+
+        var rawText = cleanText(first.value);
+        if (type === "date" && rawText) {
+          return formatDate(rawText);
+        }
+        return rawText;
+      }
+
+      function addItem(items, label, value) {
+        var normalized = cleanText(value);
+        if (normalized) {
+          items.push({ label: label, value: normalized });
+        }
+      }
+
+      function hasAnyValue(names) {
+        return names.some(function (name) {
+          return Boolean(cleanText(getRawValue(name)));
+        });
+      }
+
+      function clearInputs(container) {
+        container.querySelectorAll("input, select, textarea").forEach(function (field) {
+          var type = (field.type || "").toLowerCase();
+          if (type === "radio" || type === "checkbox") {
+            field.checked = false;
+          } else if (field.tagName.toLowerCase() === "select") {
+            field.selectedIndex = 0;
+          } else {
+            field.value = "";
+          }
+        });
+      }
+
+      function setVisibility(container, isVisible, clearOnHide) {
+        if (!container) {
+          return;
+        }
+
+        container.classList.toggle("is-hidden", !isVisible);
+        container.querySelectorAll("input, select, textarea").forEach(function (field) {
+          field.disabled = !isVisible;
+        });
+
+        if (!isVisible && clearOnHide) {
+          clearInputs(container);
+        }
+      }
+
+      function updateConditionalFields() {
+        var hasImovel = getRawValue("possui_imovel_cnpj") === "sim";
+        setVisibility(valorImovelField, hasImovel, true);
+        valorImovelInput.required = hasImovel;
+
+        setVisibility(s1ConjugeBlock, isMarriageState(getRawValue("s1_estado_civil")), true);
+        setVisibility(s2ConjugeBlock, isMarriageState(getRawValue("s2_estado_civil")), true);
+      }
+
+      function renderTable(items) {
+        var rows = items
+          .map(function (entry) {
+            return "<tr><th>" + escapeHtml(entry.label) + "</th><td>" + escapeHtml(entry.value) + "</td></tr>";
+          })
+          .join("");
+        return '<table class="pdf-table"><tbody>' + rows + "</tbody></table>";
+      }
+
+      function renderSection(section) {
+        var hasMainItems = section.items && section.items.length > 0;
+        var hasSubsections = section.subsections && section.subsections.length > 0;
+        if (!hasMainItems && !hasSubsections) {
+          return "";
+        }
+
+        var html = '<section class="pdf-section"><h2>' + escapeHtml(section.title) + "</h2>";
+
+        if (hasMainItems) {
+          html += renderTable(section.items);
+        }
+
+        if (hasSubsections) {
+          section.subsections.forEach(function (subsection) {
+            if (!subsection.items || !subsection.items.length) {
+              return;
+            }
+            html +=
+              '<div class="pdf-subsection"><h3>' +
+              escapeHtml(subsection.title) +
+              "</h3>" +
+              renderTable(subsection.items) +
+              "</div>";
+          });
+        }
+
+        html += "</section>";
+        return html;
+      }
+
+      function buildSocioSection(index) {
+        var prefix = "s" + index + "_";
+        var section = {
+          title: "Dados do Socio " + index,
+          items: [],
+          subsections: []
+        };
+
+        addItem(section.items, "Nome", getDisplayValue(prefix + "nome"));
+        addItem(section.items, "CPF", getDisplayValue(prefix + "cpf"));
+
+        var participacao = getRawValue(prefix + "participacao");
+        addItem(section.items, "Participacao Societaria (%)", participacao ? participacao + "%" : "");
+
+        addItem(section.items, "E-mail", getDisplayValue(prefix + "email"));
+        addItem(section.items, "Telefone", getDisplayValue(prefix + "telefone"));
+        addItem(section.items, "Celular", getDisplayValue(prefix + "celular"));
+        addItem(section.items, "Sexo", getDisplayValue(prefix + "sexo"));
+        addItem(section.items, "Nº da identidade", getDisplayValue(prefix + "identidade"));
+        addItem(section.items, "Orgao expedidor", getDisplayValue(prefix + "orgao_expedidor"));
+        addItem(section.items, "Data de nascimento", getDisplayValue(prefix + "data_nascimento"));
+        addItem(section.items, "Nacionalidade", getDisplayValue(prefix + "nacionalidade"));
+        addItem(section.items, "Profissao", getDisplayValue(prefix + "profissao"));
+
+        var estadoCivilRaw = getRawValue(prefix + "estado_civil");
+        addItem(section.items, "Estado civil", getDisplayValue(prefix + "estado_civil"));
+        addItem(section.items, "Regime de casamento", getDisplayValue(prefix + "regime_casamento"));
+        addItem(section.items, "Data de entrada como socio na empresa", getDisplayValue(prefix + "data_entrada"));
+
+        var conjugeNames = [
+          prefix + "conjuge_nome",
+          prefix + "conjuge_cpf",
+          prefix + "conjuge_email",
+          prefix + "conjuge_telefone",
+          prefix + "conjuge_celular",
+          prefix + "conjuge_sexo",
+          prefix + "conjuge_identidade",
+          prefix + "conjuge_orgao_expedidor",
+          prefix + "conjuge_data_nascimento",
+          prefix + "conjuge_nacionalidade",
+          prefix + "conjuge_profissao"
+        ];
+
+        if (isMarriageState(estadoCivilRaw) || hasAnyValue(conjugeNames)) {
+          var conjugeItems = [];
+          addItem(conjugeItems, "Nome do Conjuge", getDisplayValue(prefix + "conjuge_nome"));
+          addItem(conjugeItems, "CPF", getDisplayValue(prefix + "conjuge_cpf"));
+          addItem(conjugeItems, "E-mail", getDisplayValue(prefix + "conjuge_email"));
+          addItem(conjugeItems, "Telefone", getDisplayValue(prefix + "conjuge_telefone"));
+          addItem(conjugeItems, "Celular", getDisplayValue(prefix + "conjuge_celular"));
+          addItem(conjugeItems, "Sexo", getDisplayValue(prefix + "conjuge_sexo"));
+          addItem(conjugeItems, "Nº da identidade", getDisplayValue(prefix + "conjuge_identidade"));
+          addItem(conjugeItems, "Orgao expedidor", getDisplayValue(prefix + "conjuge_orgao_expedidor"));
+          addItem(conjugeItems, "Data de nascimento", getDisplayValue(prefix + "conjuge_data_nascimento"));
+          addItem(conjugeItems, "Nacionalidade", getDisplayValue(prefix + "conjuge_nacionalidade"));
+          addItem(conjugeItems, "Profissao", getDisplayValue(prefix + "conjuge_profissao"));
+
+          if (conjugeItems.length) {
+            section.subsections.push({
+              title: "Dados do Conjuge do Socio " + index,
+              items: conjugeItems
+            });
+          }
+        }
+
+        var enderecoItems = [];
+        addItem(enderecoItems, "CEP", getDisplayValue(prefix + "cep"));
+        addItem(enderecoItems, "Rua", getDisplayValue(prefix + "rua"));
+        addItem(enderecoItems, "Nº", getDisplayValue(prefix + "numero"));
+        addItem(enderecoItems, "Complemento", getDisplayValue(prefix + "complemento"));
+        addItem(enderecoItems, "Bairro", getDisplayValue(prefix + "bairro"));
+        addItem(enderecoItems, "Municipio", getDisplayValue(prefix + "municipio"));
+        addItem(enderecoItems, "Estado", getDisplayValue(prefix + "estado"));
+
+        if (enderecoItems.length) {
+          section.subsections.push({
+            title: "Endereco do Socio " + index,
+            items: enderecoItems
+          });
+        }
+
+        if (!section.items.length && !section.subsections.length) {
+          return null;
+        }
+
+        return section;
+      }
+
+      function buildReportSections() {
+        var sections = [];
+
+        var creditoItems = [];
+        addItem(creditoItems, "Prazo total", getDisplayValue("prazo_total"));
+        addItem(creditoItems, "Prazo de carencia", getDisplayValue("prazo_carencia"));
+        addItem(creditoItems, "Valor pretendido", formatCurrency(getRawValue("valor_pretendido")));
+        addItem(creditoItems, "Melhor data para vencimento da prestacao mensal", getDisplayValue("vencimento_mensal"));
+        sections.push({ title: "Capital de Giro", items: creditoItems, subsections: [] });
+
+        var empresaItems = [];
+        addItem(empresaItems, "Razao Social", getDisplayValue("razao_social"));
+        addItem(empresaItems, "CNPJ", getDisplayValue("cnpj"));
+        addItem(empresaItems, "Nº de funcionarios", getDisplayValue("numero_funcionarios"));
+        addItem(empresaItems, "Nome do Representante Legal", getDisplayValue("representante_legal"));
+        addItem(empresaItems, "CPF do Representante Legal", getDisplayValue("cpf_representante"));
+        addItem(empresaItems, "Nome do Contato da Empresa", getDisplayValue("contato_empresa"));
+        addItem(empresaItems, "E-mail do Contato", getDisplayValue("email_contato"));
+        addItem(empresaItems, "Telefone", getDisplayValue("telefone_empresa"));
+        addItem(empresaItems, "Celular", getDisplayValue("celular_empresa"));
+
+        var possuiImovelRaw = getRawValue("possui_imovel_cnpj");
+        if (possuiImovelRaw === "sim") {
+          addItem(empresaItems, "Possui imovel registrado no CNPJ", "Sim");
+          addItem(empresaItems, "Valor do imovel (conforme matricula)", formatCurrency(getRawValue("valor_imovel_cnpj")));
+        } else if (possuiImovelRaw === "nao") {
+          addItem(empresaItems, "Possui imovel registrado no CNPJ", "Nao");
+        }
+
+        addItem(empresaItems, "Endereco principal da empresa", getDisplayValue("endereco_empresa_livre"));
+
+        var enderecoEmpresaItems = [];
+        addItem(enderecoEmpresaItems, "CEP", getDisplayValue("cep_empresa"));
+        addItem(enderecoEmpresaItems, "Rua", getDisplayValue("rua_empresa"));
+        addItem(enderecoEmpresaItems, "Nº", getDisplayValue("numero_empresa"));
+        addItem(enderecoEmpresaItems, "Compl.", getDisplayValue("complemento_empresa"));
+        addItem(enderecoEmpresaItems, "Bairro", getDisplayValue("bairro_empresa"));
+        addItem(enderecoEmpresaItems, "Municipio", getDisplayValue("municipio_empresa"));
+        addItem(enderecoEmpresaItems, "Estado", getDisplayValue("estado_empresa"));
+
+        var empresaSubsections = [];
+        if (enderecoEmpresaItems.length) {
+          empresaSubsections.push({ title: "Endereco da Empresa", items: enderecoEmpresaItems });
+        }
+
+        sections.push({
+          title: "Dados da Empresa",
+          items: empresaItems,
+          subsections: empresaSubsections
+        });
+
+        var contaItems = [];
+        addItem(contaItems, "Nome Banco", getDisplayValue("nome_banco"));
+        addItem(contaItems, "Nº Banco", getDisplayValue("numero_banco"));
+        addItem(contaItems, "Agencia", getDisplayValue("agencia_banco"));
+        addItem(contaItems, "Conta", getDisplayValue("conta_banco"));
+        addItem(contaItems, "Digito", getDisplayValue("digito_conta_banco"));
+
+        if (contaItems.length) {
+          sections.push({
+            title: "Conta Bancaria da Empresa (para liberacao dos recursos)",
+            items: contaItems,
+            subsections: []
+          });
+        }
+
+        var socio1Section = buildSocioSection(1);
+        if (socio1Section) {
+          sections.push(socio1Section);
+        }
+
+        var socio2Section = buildSocioSection(2);
+        if (socio2Section) {
+          sections.push(socio2Section);
+        }
+
+        var observacaoItems = [];
+        addItem(observacaoItems, "Obs.", getDisplayValue("observacoes"));
+        addItem(observacaoItems, "Aceite da declaracao", getDisplayValue("aceite_declaracao"));
+        addItem(observacaoItems, "Representante Legal da Empresa Proponente", getDisplayValue("assinatura_representante_nome"));
+        addItem(observacaoItems, "CPF do Representante", getDisplayValue("assinatura_representante_cpf"));
+        addItem(observacaoItems, "Data", getDisplayValue("data_assinatura"));
+
+        sections.push({
+          title: "Observacoes e Declaracao",
+          items: observacaoItems,
+          subsections: []
+        });
+
+        return sections;
+      }
+
+      function buildPdfMarkup(sections) {
+        var generatedAt = new Date().toLocaleString("pt-BR");
+        var content = sections.map(renderSection).join("");
+        return (
+          '<div class="pdf-doc">' +
+          '<header class="pdf-header">' +
+          "<h1>Formulario para o Preenchimento de Proposta de Financiamento BDMG Digital</h1>" +
+          "<p>Documento gerado em " +
+          escapeHtml(generatedAt) +
+          "</p>" +
+          "</header>" +
+          content +
+          '<section class="pdf-section">' +
+          "<h2>Orientacoes adicionais</h2>" +
+          '<table class="pdf-table"><tbody>' +
+          "<tr><th>1</th><td>Caso a empresa tenha mais de 2 socios, pede-se o preenchimento de nova ficha com os dados dos demais socios.</td></tr>" +
+          "<tr><th>2</th><td>Poderao ser solicitados documentos complementares para a analise da proposta, como a comprovacao do faturamento nos ultimos 12 meses.</td></tr>" +
+          "<tr><th>3</th><td>Enviar o Imposto de Renda Pessoa Fisica do ultimo exercicio dos socios (imoveis e veiculos).</td></tr>" +
+          "</tbody></table>" +
+          "</section>" +
+          '<footer class="pdf-footer">' +
+          "Nos termos do contrato de correspondente bancario vigente, a empresa proponente autoriza o BDMG a consultar o SCR, " +
+          "obter informacoes da Secretaria de Estado da Fazenda e consultar cadastros publicos e privados para analise do credito " +
+          "e atualizacao/renovacao cadastral." +
+          "</footer>" +
+          "</div>"
+        );
+      }
+
+      function getFileName() {
+        var cnpj = cleanText(getRawValue("cnpj")).replace(/[^0-9]/g, "");
+        var datePart = new Date().toISOString().slice(0, 10);
+        return "proposta-bdmg-" + (cnpj || "sem-cnpj") + "-" + datePart + ".pdf";
+      }
+
+      function buildPdfHtmlDocument(sections) {
+        var pdfStyles =
+          "<style>" +
+          "@page { size: A4; margin: 12mm; }" +
+          "body { margin: 0; color: #182028; font-family: Arial, Helvetica, sans-serif; }" +
+          ".pdf-doc { font-size: 12px; line-height: 1.35; }" +
+          ".pdf-header { border-bottom: 2px solid #0d6a73; padding-bottom: 8px; margin-bottom: 14px; }" +
+          ".pdf-header h1 { margin: 0 0 4px; font-size: 18px; color: #0a5057; }" +
+          ".pdf-header p { margin: 0; color: #4e626b; font-size: 11px; }" +
+          ".pdf-section { margin-top: 10px; break-inside: avoid-page; }" +
+          ".pdf-section h2 { margin: 0 0 5px; font-size: 13px; color: #193844; }" +
+          ".pdf-subsection { margin-top: 8px; }" +
+          ".pdf-subsection h3 { margin: 0 0 5px; font-size: 12px; color: #2f4f5d; }" +
+          ".pdf-table { width: 100%; border-collapse: collapse; border: 1px solid #ccd5da; }" +
+          ".pdf-table th, .pdf-table td { border: 1px solid #ccd5da; text-align: left; vertical-align: top; padding: 4px 6px; word-break: break-word; }" +
+          ".pdf-table th { width: 34%; background: #eef4f7; color: #2e4f5c; font-weight: 700; }" +
+          ".pdf-table td { background: #fff; color: #1e2d34; }" +
+          ".pdf-footer { margin-top: 12px; border-top: 1px solid #d3dde2; padding-top: 8px; font-size: 11px; color: #55666e; }" +
+          "</style>";
+
+        return (
+          "<!doctype html>" +
+          '<html lang="pt-BR"><head><meta charset="utf-8" />' +
+          pdfStyles +
+          "</head><body>" +
+          buildPdfMarkup(sections) +
+          "</body></html>"
+        );
+      }
+
+      async function generatePdfViaServer(sections) {
+        var endpoint = cleanText(form.dataset.pdfEndpoint) || "/api/exportar-pdf";
+        var requestBody = {
+          html: buildPdfHtmlDocument(sections),
+          fileName: getFileName()
+        };
+
+        var response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+          var errorText = await response.text();
+          throw new Error("Falha na geracao do PDF pelo servidor: " + (cleanText(errorText) || response.status));
+        }
+
+        var pdfBlob = await response.blob();
+        if (!pdfBlob || !pdfBlob.size) {
+          throw new Error("Servidor retornou PDF vazio.");
+        }
+
+        var blobUrl = window.URL.createObjectURL(pdfBlob);
+        var anchor = document.createElement("a");
+        anchor.href = blobUrl;
+        anchor.download = getFileName();
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+        window.URL.revokeObjectURL(blobUrl);
+      }
+
+      function generatePdfWithJsPdf(sections) {
+        if (!window.jspdf || typeof window.jspdf.jsPDF !== "function") {
+          return false;
+        }
+
+        var doc = new window.jspdf.jsPDF({
+          orientation: "portrait",
+          unit: "mm",
+          format: "a4"
+        });
+
+        var pageWidth = doc.internal.pageSize.getWidth();
+        var pageHeight = doc.internal.pageSize.getHeight();
+        var margin = 12;
+        var lineHeight = 4.8;
+        var cursorY = margin;
+
+        function ensureSpace(requiredHeight) {
+          if (cursorY + requiredHeight > pageHeight - margin) {
+            doc.addPage();
+            cursorY = margin;
+          }
+        }
+
+        function writeWrapped(text, indent, fontStyle, fontSize) {
+          var safeText = cleanText(text);
+          if (!safeText) {
+            return;
+          }
+
+          var x = margin + (indent || 0);
+          var maxWidth = pageWidth - margin - x;
+          var lines = doc.splitTextToSize(safeText, maxWidth);
+          var size = fontSize || 10;
+
+          doc.setFont("helvetica", fontStyle || "normal");
+          doc.setFontSize(size);
+          ensureSpace(lines.length * lineHeight + 1);
+          doc.text(lines, x, cursorY);
+          cursorY += lines.length * lineHeight;
+        }
+
+        function writeSectionTitle(title, indent) {
+          var titleIndent = indent || 0;
+          ensureSpace(8);
+          writeWrapped(title, titleIndent, "bold", 11);
+          doc.setDrawColor(160, 176, 186);
+          doc.setLineWidth(0.2);
+          doc.line(margin + titleIndent, cursorY - 1.3, pageWidth - margin, cursorY - 1.3);
+          cursorY += 1.6;
+        }
+
+        function writeItems(items, indent) {
+          if (!items || !items.length) {
+            return;
+          }
+
+          items.forEach(function (item) {
+            writeWrapped(item.label + ": " + item.value, indent || 0, "normal", 10);
+            cursorY += 0.5;
+          });
+        }
+
+        function writeSection(section) {
+          var hasMainItems = section.items && section.items.length > 0;
+          var hasSubsections = section.subsections && section.subsections.length > 0;
+
+          if (!hasMainItems && !hasSubsections) {
+            return;
+          }
+
+          writeSectionTitle(section.title, 0);
+          writeItems(section.items, 0);
+
+          if (hasSubsections) {
+            section.subsections.forEach(function (subsection) {
+              if (!subsection.items || !subsection.items.length) {
+                return;
+              }
+              cursorY += 1.2;
+              writeSectionTitle(subsection.title, 3);
+              writeItems(subsection.items, 3);
+            });
+          }
+
+          cursorY += 2;
+        }
+
+        writeWrapped("Formulario para o Preenchimento de Proposta de Financiamento BDMG Digital", 0, "bold", 13);
+        writeWrapped("Documento gerado em " + new Date().toLocaleString("pt-BR"), 0, "normal", 9);
+        cursorY += 1.8;
+
+        sections.forEach(writeSection);
+
+        writeSectionTitle("Orientacoes adicionais", 0);
+        writeWrapped("1) Caso a empresa tenha mais de 2 socios, pede-se o preenchimento de nova ficha com os dados dos demais socios.", 0, "normal", 10);
+        writeWrapped("2) Poderao ser solicitados documentos complementares para a analise da proposta, como a comprovacao do faturamento nos ultimos 12 meses.", 0, "normal", 10);
+        writeWrapped("3) Enviar o Imposto de Renda Pessoa Fisica do ultimo exercicio dos socios (imoveis e veiculos).", 0, "normal", 10);
+        cursorY += 1.6;
+
+        writeSectionTitle("Declaracao", 0);
+        writeWrapped(
+          "Nos termos do contrato de correspondente bancario vigente, a empresa proponente autoriza o BDMG a consultar o SCR, obter informacoes da Secretaria de Estado da Fazenda e consultar cadastros publicos e privados para analise do credito e atualizacao/renovacao cadastral.",
+          0,
+          "normal",
+          10
+        );
+
+        doc.save(getFileName());
+        return true;
+      }
+
+      async function generatePdf() {
+        var sections = buildReportSections();
+        var provider = cleanText(form.dataset.pdfProvider).toLowerCase();
+
+        if (provider === "server") {
+          await generatePdfViaServer(sections);
+          return;
+        }
+
+        var generatedWithJsPdf = generatePdfWithJsPdf(sections);
+        if (generatedWithJsPdf) {
+          return;
+        }
+
+        if (typeof window.html2pdf === "undefined") {
+          throw new Error("Biblioteca de PDF nao carregada.");
+        }
+
+        pdfExportRoot.innerHTML = buildPdfMarkup(sections);
+
+        var pdfOptions = {
+          margin: [7, 7, 9, 7],
+          filename: getFileName(),
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+          pagebreak: { mode: ["css", "legacy"] }
+        };
+
+        await window.html2pdf().set(pdfOptions).from(pdfExportRoot).save();
+      }
+
+      if (possuiImovelSelect) {
+        possuiImovelSelect.addEventListener("change", updateConditionalFields);
+      }
+
+      if (s1EstadoCivil) {
+        s1EstadoCivil.addEventListener("change", updateConditionalFields);
+      }
+
+      if (s2EstadoCivil) {
+        s2EstadoCivil.addEventListener("change", updateConditionalFields);
+      }
+
+      form.addEventListener("reset", function () {
+        statusMessage.textContent = "";
+        window.setTimeout(function () {
+          bindMasks();
+          updateConditionalFields();
+        }, 0);
+      });
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        if (!form.reportValidity()) {
+          return;
+        }
+
+        submitButton.disabled = true;
+        statusMessage.textContent = "Gerando PDF da proposta...";
+
+        try {
+          await generatePdf();
+          statusMessage.textContent = "PDF gerado com sucesso. O download foi iniciado.";
+
+          if (form.dataset.submitAfterPdf === "true" && form.action && form.action !== "#") {
+            statusMessage.textContent = "PDF gerado. Enviando proposta...";
+            HTMLFormElement.prototype.submit.call(form);
+          }
+        } catch (error) {
+          statusMessage.textContent = "Nao foi possivel gerar o PDF. Verifique o console do navegador.";
+          console.error(error);
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      bindMasks();
+      updateConditionalFields();
+    })();
+  </script>
+</body>
+</html>
