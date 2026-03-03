@@ -381,7 +381,7 @@
       </p>
     </section>
 
-    <form id="bdmgForm" action="#" method="post" data-submit-after-pdf="false" data-pdf-provider="server" data-pdf-endpoint="/api/exportar-pdf">
+    <form id="bdmgForm" action="#" method="post" data-submit-after-pdf="false" data-pdf-provider="server" data-pdf-endpoint="https://gabrielbelizario.com/api-bdmg/exportar-form-pdf">
       <section class="section">
         <h2>1) Dados do Credito - Capital de Giro</h2>
         <div class="grid">
@@ -1641,7 +1641,7 @@
       }
 
       async function generatePdfViaServer(sections) {
-        var endpoint = cleanText(form.dataset.pdfEndpoint) || "/api/exportar-pdf";
+        var endpoint = cleanText(form.dataset.pdfEndpoint) || "/api-bdmg/exportar-form-pdf";
         var requestBody = {
           html: buildPdfHtmlDocument(sections),
           fileName: getFileName()

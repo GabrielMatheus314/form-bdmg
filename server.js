@@ -72,11 +72,11 @@ async function runLibreOfficeConvert(inputFilePath, outputDir) {
   throw notFoundError;
 }
 
-app.get("/api/health", (_req, res) => {
+app.get("/api-bdmg/health", (_req, res) => {
   res.json({ ok: true, service: "pdf-export" });
 });
 
-app.post("/api/exportar-pdf", async (req, res) => {
+app.post("/api-bdmg/exportar-form-pdf", async (req, res) => {
   const html = typeof req.body?.html === "string" ? req.body.html : "";
   const requestedFileName = typeof req.body?.fileName === "string" ? req.body.fileName : "proposta-bdmg.pdf";
 
